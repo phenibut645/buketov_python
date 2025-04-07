@@ -33,7 +33,7 @@ class Hospital:
         self.__doctors: list[Doctor] = []
         return None
 
-    def append(self, person):
+    def append(self, person: Person):
         if isinstance(person, Person):
             if isinstance(person, Patcient):
                 self.__patcients.append(person)
@@ -51,15 +51,22 @@ class Hospital:
             case p if issubclass(person_type, Patcient):
                 self.__print_persons(self.__patcients)
         
-    def organize_meet(self, doctor: Doctor, patcient: Patcient, time: str) -> Meet:
-        meet = Meet(self, doctor, patcient, time)
-        with open("meets.txt", 'a') as f:
-            f.write(f'Doctor: {meet.doctor.name}, Patcient: {meet.patcient.name}, time: {meet.time}\n')
-        return meet
+    def organize_meet(self: Hospital, doctor: Doctor, patcient: Patcient, time: str) -> Meet:
+        if doctor in self.__doctors and patcient in self.__patcients:
+            meet = Meet(self, doctor, patcient, time)
+            with open("meets.txt", 'a') as f:
+                f.write(f'Doctor: {meet.doctor.name}, Patcient: {meet.patcient.name}, time: {meet.time}\n')
+            return meet
+        else:
+            print("nah")
 
-    def __print_persons(self, persons):
+    def __print_persons(self: Hospital, persons: list[Person]):
         for index, person in enumerate(persons):
             print(f'Index: {index + 1}, Name: {person.name}, Age: {person.age}, Role: {person.role}')
+
+    def meets_output(self):
+        with open("meets.txt", 'r') as f:
+            print("".join(f.readlines()))
 
 class Meet:
     def __init__(self, hospital: Hospital, doctor: Doctor, patcient: Patcient, time: str):
@@ -93,3 +100,4 @@ print("---------------------------------------------")
 seva.hello()
 kirill.hello()
 hospital.organize_meet(seva, kirill, "11:50")
+hospital.meets_output()
