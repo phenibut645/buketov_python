@@ -27,13 +27,13 @@ def log_write(success, data, timestamp):
     with open(success_file_path if success else error_file_path, "+a") as f:
         cvnt = data
         if isinstance(data, str):
-            cnvt = [{"message":data, "timestamp":timestamp}]
-        for log in data:
+            cvnt = [{"message":data, "timestamp":timestamp}]
+        for log in cvnt:
             now = datetime.datetime.now().strftime("%H:%M:%S")
-            x = f"====  {now}  =======  timestamp: {log["timestamp"]}  "
+            tstmp = log.get("timestamp")
+            x = f"====  {now}  =======  timestamp: {tstmp}  "
             x += "=" * (min_sym - len(x))
             f.write(x + "\n")
-            
             f.write("- " + log["message"] + "\n")
             f.write("=" * len(x) + "\n\n")
 
@@ -46,13 +46,14 @@ def get_records(filepath):
 def process_log_file(filepath):
     records = get_records(filepath)
     prepared_logs = {
-        success: [],
-        failed: []
+        "success": [],
+        "failed": []
     }
     for record in records:
         valid, message, timestamp = validate_record(record)
         prepared_logs["success" if valid else "failed"].append({"message":message, "timestamp":timestamp})
-    
+    log_write(True, prepared_logs["success"], None)
+    log_write(False, prepared_logs["failed"], None)
 
 def main():
     process_log_file("log_input.json")
