@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="categories-wrapper">
+        <h1>Categories</h1>
+        <div class="categories-container">
+            <button onclick="showNews('technology')">Technology</button>
+            <button onclick="showNews('sport')">Sport</button>
+            <button onclick="showNews('economy')">Economy</button>
+        </div>
+    </div>
+
+    <div class="news-container">
+        <h1>News</h1>
+        <div class="item-container">
+
+        </div>
+    </div>
+    
+    <div class="article-container">
+        <h1>Add article</h1>
+        <label for="article-source">
+            Source
+        </label>
+        <select name="article-source" id="article-source">
+            <option value="technology">Technology</option>
+            <option value="sport">Sport</option>
+            <option value="economy">Economy</option>
+        </select>
+        
+        <label for="article-date">Date</label>
+        <input id="article-date" type="date">
+
+        <label for="article-title">Title</label>
+        <input type="text" id="article-title">
+        <button id="submit-article">Submit</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
