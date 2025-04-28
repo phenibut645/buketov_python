@@ -6,47 +6,62 @@ const articleTitle = document.getElementById("article-title")
 
 const newsContainer = document.getElementsByClassName("item-container")[0]
 
+let lastId = 1;
+
 submitButton.addEventListener("click", (target) =>{
-    console.log(123)
     news[articleSource.value].push({
+        id: lastId,
         title: articleTitle.value,
         source: articleSource.value,
         date: articleDate.value
     })
+    lastId++
 })
 
 function showNews(category) {
+    newsContainer.innerHTML = ""
     news[category].forEach(element => {
-        addArticle(element.title, element.source, element.date)
+        addArticle(element, category)
     });
 }
 
-function addArticle(title, source, date){
+function addArticle(element, category){
     const divContainer = document.createElement("div")
     const titleElement = document.createElement("p")
     const dateElement = document.createElement("p")
     const sourceElement = document.createElement("p")
-    titleElement.innerHTML = title
-    dateElement.innerHTML = date
-    sourceElement.innerHTML = source
+    const buttonElement = document.createElement("button")
+    titleElement.innerHTML = element.title
+    dateElement.innerHTML = element.date
+    sourceElement.innerHTML = element.source
+    buttonElement.innerHTML = "Delete article"
+    buttonElement.id = element.id
+
+    buttonElement.addEventListener("click", (target) =>{
+        let index = -1;
+        news[category].forEach(element => {
+            index++
+            if (element.id.value === target.target.id.value) {
+                return
+            }
+        })
+        news[category].splice(index, 1);
+
+        showNews(category)
+    })
+
     divContainer.appendChild(titleElement)
     divContainer.appendChild(dateElement)
     divContainer.appendChild(sourceElement)
+    divContainer.appendChild(buttonElement)
     newsContainer.appendChild(divContainer)
 }
 
 const news = {
     technology: [
-        {
-            title: "",
-            source: "",
-            date: ""
-        }
     ],
     sport: [
-        {}
     ],
     economy: [
-        {}
     ]
 }
