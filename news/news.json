@@ -1,3 +1,44 @@
 {
-    
+    "technology": [
+        {
+            "id": null,
+            "title": "IT gg",
+            "source": null,
+            "date": "25.11.2025"
+        },
+        {
+            "id": null,
+            "title": "Node JS",
+            "source": null,
+            "date": "11.12.2025"
+        }
+    ],
+    "sport": [
+        {
+            "id": null,
+            "title": "Basketball",
+            "source": null,
+            "date": "25.11.2025"
+        },
+        {
+            "id": null,
+            "title": "Football",
+            "source": null,
+            "date": "11.12.2025"
+        }
+    ],
+    "economy": [
+        {
+            "id": null,
+            "title": "Euro",
+            "source": null,
+            "date": "25.11.2025"
+        },
+        {
+            "id": null,
+            "title": "something",
+            "source": null,
+            "date": "11.12.2025"
+        }
+    ]
 }
