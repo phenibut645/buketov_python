@@ -6,7 +6,31 @@ const articleTitle = document.getElementById("article-title")
 
 const newsContainer = document.getElementsByClassName("item-container")[0]
 
-let lastId = 1;
+let lastId = -1;
+
+async function getJSONData(path){
+    const response = await fetch(path); 
+    const json = await response.json();
+    return json
+}
+
+function getLastId(){
+    lastId++;
+    return lastId;
+}
+
+async function importData(){
+    const json = await getJSONData("./news.json");
+    const keys = ["technology", "sport", "economy"]
+    keys.forEach(key => {
+        json[key].forEach(article =>{
+            article["id"] = getLastId();
+            article["source"] = key;
+            news[key].push(article)
+        })
+    })
+}
+importData(); 
 
 submitButton.addEventListener("click", (target) =>{
     news[articleSource.value].push({
